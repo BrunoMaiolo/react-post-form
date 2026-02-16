@@ -16,12 +16,15 @@ function App() {
       [name]: type === "checkbox" ? checked : value,
     });
   };
-
+ const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
   return (
     <div style={{ padding: "40px" }}>
       <h1>Post Form</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Autore</label>
           <input
