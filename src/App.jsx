@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [formData, setFormData] = useState({
+    author: "",
+    title: "",
+    body: "",
+    public: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ padding: "40px" }}>
+      <h1>Post Form</h1>
+
+      <form>
+        <div>
+          <label>Autore</label>
+          <input
+            type="text"
+            name="author"
+            value={formData.author}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label>Titolo</label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label>Testo</label>
+          <textarea
+            name="body"
+            value={formData.body}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label>
+            Pubblico
+            <input
+              type="checkbox"
+              name="public"
+              checked={formData.public}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+
+        <button type="submit">Invia</button>
+      </form>
+    </div>
+  );
 }
 
-export default App
+export default App;
