@@ -17,8 +17,20 @@ function App() {
     });
   };
  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
+  e.preventDefault();
+
+  fetch("https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("POST inviato:", data);
+    })
+    .catch((err) => console.error(err));
   };
   return (
     <div style={{ padding: "40px" }}>
